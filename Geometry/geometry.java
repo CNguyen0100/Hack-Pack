@@ -99,7 +99,23 @@ public class geometry {
 	// (making sure to deal with signs properly) and then by writing exact
 	// tests for checking point on polygon boundary
 	boolean PointInPolygon(Vector<PT> p, PT q) {
-		return true;
+		boolean c = false;
+		for (int i = 0; i < p.size(); i++){
+			int j = (i+1)%p.size();
+			if ((p.get(i).y <= q.y && q.y < p.get(j).y || 
+			p.get(j).y <= q.y && q.y < p.get(i).y) &&
+			q.x < p.get(i).x + (p.get(j).x - p.get(i).x) * (q.y - p.get(i).y) / (p.get(j).y - p.get(i).y))
+				c = !c;
+		}
+		return c;
+	}
+	
+	// determine if point is on the boundary of a polygon
+	boolean PointOnPolygon(Vector<PT> p, PT q) {
+		for (int i = 0; i < p.size(); i++)
+			if (dist2(ProjectPointSegment(p.get(i), p.get((i+1)%p.size()), q), q) < EPS)
+				return true;
+		return false;
 	}
 }
 
