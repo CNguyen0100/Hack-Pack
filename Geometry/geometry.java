@@ -72,7 +72,7 @@ public class geometry {
 	//project point c onto line through a and b
 	//assuming a!=  b
 	PT ProjectPointLine(PT a, PT b, PT c){
-		return a.add(b.minus(a)*dot(c.minus(a))/dot(b.minus(a),b.minus(a)));
+		return a.add((b.minus(a)).mul(dot(c.minus(a),c.minus(a))/dot(b.minus(a),b.minus(a))));
 	}
 	
 	//project point c onto line through a and b
@@ -91,7 +91,16 @@ public class geometry {
 	}
 	
 	/**Polygon**/
-	
+	// determine if point is in a possibly non-convex polygon (by William
+	// Randolph Franklin); returns 1 for strictly interior points, 0 for
+	// strictly exterior points, and 0 or 1 for the remaining points.
+	// Note that it is possible to convert this into an *exact* test using
+	// integer arithmetic by taking care of the division appropriately
+	// (making sure to deal with signs properly) and then by writing exact
+	// tests for checking point on polygon boundary
+	boolean PointInPolygon(Vector<PT> p, PT q) {
+		return true;
+	}
 }
 
 
